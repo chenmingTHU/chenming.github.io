@@ -153,12 +153,8 @@
     </div>
     <h2 class="subtitle has-text-centered">
       Our streaming generation approach processes
-      inputs in chunks, where each chunk contains condition tokens (audio, pose) followed by frame
-      tokens. The autoregressive model generates frame tokens sequentially, which are then corrupted
-      with same level noise and passed to the diffusion head for denoising. Each diffusion head refines
-      its corresponding frame independently before reconstruction through the VAE decoder. n denotes
-      the number of frames in each chunk. Chunk boundaries (dashed lines) indicate where the inference
-      process can be restarted with new conditioning inputs.
+      inputs in chunks, where each chunk contains condition tokens followed by frame
+      tokens. The autoregressive model generates visual tokens within each frame sequentially to achieve real-time performance.
     </h2>
   </div>
 </section>
