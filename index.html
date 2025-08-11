@@ -275,26 +275,23 @@
           </div>
         </div>
 
-        <!-- Re-rendering. -->
-        <h3 class="title is-4">Re-rendering the input video</h3>
+        <!-- <h3 class="title is-4">Re-rendering the input video</h3> -->
         <div class="content has-text-justified">
           <p>
-            Using <span class="dnerf">Nerfies</span>, you can re-render a video from a novel
-            viewpoint such as a stabilized camera by playing back the training deformations.
+            our system enables natural turn-taking dialogue between
+            digital avatars with synchronized audio-visual responses. Each avatar maintains appropriate listen-
+            ing expressions when the other is speaking, and becomes animated with synchronized lip move-
+            ments and facial expressions when driven by their corresponding audio input. The audio waveforms
+            (visualized in blue and green) clearly indicate the speaking turns. This demonstrates the model’s
+            ability to generate contextually appropriate reactions and maintain speaker identity while handling
+            the complex dynamics of conversational interaction.
           </p>
         </div>
         <div class="content has-text-centered">
-          <video id="replay-video"
-                 controls
-                 muted
-                 preload
-                 playsinline
-                 width="75%">
-            <source src="./static/videos/replay.mp4"
-                    type="video/mp4">
-          </video>
+          <img src="./static/images/dialog.png"
+          class="interpolation-image"
+          alt="Interpolate start reference image."/>
         </div>
-        <!--/ Re-rendering. -->
 
       </div>
     </div>
