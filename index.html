@@ -304,7 +304,7 @@
         <!-- <h3 class="title is-4">Re-rendering the input video</h3> -->
         <div class="content has-text-justified">
           <p>
-            our system enables natural turn-taking dialogue between
+            Our system enables natural turn-taking dialogue between
             digital avatars with synchronized audio-visual responses. Each avatar maintains appropriate listen-
             ing expressions when the other is speaking, and becomes animated with synchronized lip move-
             ments and facial expressions when driven by their corresponding audio input. The audio waveforms
@@ -328,6 +328,15 @@
 
 <section class="section">
   <div class="container is-max-desktop">
+    <h2 class="title is-3">Limitations</h2>
+    <p>
+      The current model exhibits limitations in generalization capability; 
+      when using arbitrary images as the initial frame, 
+      the generated videos suffer from issues in identity preservation, 
+      temporal consistency, and stability, making it infeasible to perform long-duration inference while maintaining high quality. 
+      Addressing these shortcomings may require larger-scale datasets and more powerful models in the future.
+    </p>
+
     <div id="results-carousel" class="carousel results-carousel">
       <div class="item item-steve">
         <video poster="" id="steve" autoplay controls muted loop playsinline height="50%">
