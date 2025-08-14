@@ -155,9 +155,24 @@
     </div>
     <h2 class="subtitle has-text-centered">
       Our streaming generation approach processes
-      inputs in chunks, where each chunk contains condition tokens followed by frame
-      tokens. The autoregressive model generates visual tokens within each frame sequentially to achieve real-time performance.
+      inputs in chunks.
     </h2>
+    <p>
+      To enable efficient streaming generation, we organize inputs and outputs into logical chunks, where
+      each chunk contains a concatenated sequence of audio tokens, pose tokens, and frame tokens.
+      Specifically, each chunk representation consists of 6 audio tokens, 10 pose tokens, and 6 frames
+      of video where each frame is unfolded to 60 tokens, all concatenated sequentially from left to right.
+      This structured token organization facilitates both streaming control input and sequential output
+      generation, allowing for real-time responsiveness while maintaining contextual coherence across
+      chunks.
+    </p>
+    <p>
+      We design a specialized frame-level causal attention mask to optimize for both streaming generation
+      and output quality. This mask permits each token to attend only to tokens from previous frames and
+      to all tokens within its own frame. This hybrid approach—causal attention between frames and full
+      attention within frames—balances temporal consistency with spatial coherence, critically important
+      for high-quality visual outputs.
+    </p>
   </div>
 </section>
 
