@@ -173,6 +173,10 @@
       attention within frames—balances temporal consistency with spatial coherence, critically important
       for high-quality visual outputs.
     </p>
+    <p>
+      For efficient inference, we implement the diffusion head as an MLP and utilize flow matching to achieve high sampling efficiency. 
+      At inference time, the diffusion head completes the generation process within 5–10 sampling iterations, enabling real-time performance.
+    </p>
   </div>
 </section>
 
