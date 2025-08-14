@@ -167,8 +167,6 @@
     <p>
       To enable efficient streaming generation, we organize inputs and outputs into logical chunks, where
       each chunk contains a concatenated sequence of audio tokens, pose tokens, and frame tokens.
-      Specifically, each chunk representation consists of 6 audio tokens, 10 pose tokens, and 6 frames
-      of video where each frame is unfolded to 60 tokens, all concatenated sequentially from left to right.
       This structured token organization facilitates both streaming control input and sequential output
       generation, allowing for real-time responsiveness while maintaining contextual coherence across
       chunks.
