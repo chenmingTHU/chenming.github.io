@@ -154,7 +154,7 @@
 
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3">Model</h2>
+    <h2 class="title is-4">Autoregressive Generation Model</h2>
     <div class="columns is-centered has-text-centered">
       <img src="./static/images/inference.png"
         class="interpolation-image"
@@ -180,6 +180,33 @@
     <p>
       For efficient inference, we implement the diffusion head as an MLP and utilize flow matching to achieve high sampling efficiency. 
       At inference time, the diffusion head completes the generation process within 5–10 sampling iterations, enabling real-time performance.
+    </p>
+  </div>
+  <div class="container is-max-desktop">
+    <h2 class="title is-4">High Compressive Video Tokenizer</h2>
+    <div class="columns is-centered has-text-centered">
+      <img src="./static/images/vae.png"
+        class="interpolation-image"
+        alt="Interpolate start reference image."/>
+    </div>
+    <h2 class="subtitle has-text-centered">
+      Illustration of streaming autoencoding.
+    </h2>
+    <p>
+      For real-time AR video generation, our streaming autoencoder meets two key criteria: 
+      (1) maintain high reconstruction fidelity under strong spatial compression to enable efficient processing by LLM, 
+      and (2) preserve and explicitly model the temporal dimension during encoding and decoding to support autoregressive generation with coherent, 
+      flicker-free outputs. 
+    </p>
+    <p>
+      Training is performed in three stages: 
+      (i) pretraining of the Deep Compression Autoencoder (DC-AE),
+      (ii) temporal module training, where causal 3D convolutions and RoPE-based attention layers are inserted after each spatial layer, 
+      and (iii) joint fine-tuning. 
+    </p>
+    <p>
+      During inference, streaming encoding and decoding are performed frame by frame with cached temporal features (feature maps and key/value caches), 
+      leveraging a short history buffer to ensure real-time autoregressive generation with temporal consistency.
     </p>
   </div>
 </section>
