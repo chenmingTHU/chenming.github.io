@@ -95,6 +95,8 @@
             <span class="author-block">
               <a href="https://chenmingthu.github.io/chenming.github.io/">Haoxian Zhang</a><sup>1</sup>,</span>
             <span class="author-block">
+              <a href="https://chenmingthu.github.io/chenming.github.io/">Wenyuan Zhang</a><sup>1,3</sup>,</span>
+            <span class="author-block">
               <a href="https://chenmingthu.github.io/chenming.github.io/">Yan Zhou</a><sup>1</sup>,</span>
             <span class="author-block">
               <a href="https://chenmingthu.github.io/chenming.github.io/">Xiaohan Li</a><sup>1</sup>,</span>
@@ -105,6 +107,7 @@
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>Kuaishou Technology</span>
             <span class="author-block"><sup>2</sup>Zhejiang University</span>
+            <span class="author-block"><sup>2</sup>Tsinghua University</span>
           </div>
 
           
@@ -210,6 +213,37 @@
     <p>
       During inference, streaming encoding and decoding are performed frame by frame with cached temporal features (feature maps and key/value caches), 
       leveraging a short history buffer to ensure real-time autoregressive generation with temporal consistency.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="container is-max-desktop">
+    <h2 class="title is-4">Dataset Construction and Processing</h2>
+    <div class="columns is-centered has-text-centered">
+      <img src="./static/images/dataproc.png"
+        class="interpolation-image"
+        alt="Interpolate start reference image."/>
+    </div>
+    <h2 class="subtitle has-text-centered">
+      Illustration of streaming autoencoding.
+    </h2>
+    <p>
+      The training dataset combines single-person and two-person speech content from three sources: 
+      (1) Publicly available benchmarks (VoxCeleb1/2, TED-LRS); 
+      (2) curated online videos including podcasts, interviews, talk shows, and speeches; and 
+      (3) custom-recorded sessions featuring controlled two-person interactions.
+    </p>
+    <p>
+      Data processing consists of three stages: preprocessing, annotation and synthetic data construction, and post-processing. 
+      Preprocessing: Temporal segmentation is performed using shot boundary detection and active speaker detection (ASD), followed by filtering of human subjects via face and body detection. 
+      Each segmented clip then undergoes rigorous evaluation for visual quality, audio quality, and lip synchronization. 
+      Annotation and Data Construction: This stage includes quality assessment, caption, emotion label, and automatic speech recognition (ASR) transcription. 
+      A part of single-person data is adapted into conversational formats using semantic analysis and text-to-speech (TTS) synthesis. 
+      Post-processing: Annotated data undergoes manual review combined with automatic sampling to ensure balanced, high-quality subsets. 
+    </p>
+    <p>
+      The final dataset contains approximately 20,000 hours of pre-training video data and over 400 hours of duplex fine-tuning (SFT) data.
     </p>
   </div>
 </section>
