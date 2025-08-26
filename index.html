@@ -93,7 +93,7 @@
             <span class="author-block">
               <a href="https://scholar.google.com/citations?user=WhwTrhcAAAAJ&hl=zh-CN">Liyuan Cui</a><sup>1,2,*</sup>,</span>
             <span class="author-block">
-              <a href="https://wen-yuan-zhang.github.io/">Wenyuan Zhang</a><sup>1,3</sup>,</span>
+              <a href="https://wen-yuan-zhang.github.io/">Wenyuan Zhang</a><sup>1,3,*</sup>,</span>
             <span class="author-block">
               <a href="https://openreview.net/profile?id=~Haoxian_Zhang1">Haoxian Zhang</a><sup>1</sup>,</span>
             <span class="author-block">
@@ -116,6 +116,31 @@
             <sup>*</sup> Equal contribution.
           </p>
 
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+
+              <!-- <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span> -->
+
+            </div>
+
+          </div>
           
         </div>
       </div>
@@ -145,14 +170,13 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Interactive digital human video generation has attracted widespread research attention and has achieved remarkable progress. 
-            However, most existing portrait video generation approaches rely on pretrained video models as renderers, 
-            which significantly increases generation latency and computational cost. 
-            In this work, we anchor our study in the interactive digital human scenario and propose an autoregressive real-time video generation framework. 
-            Our system enables real-time portrait video synthesis with multimodal control, 
-            achieved through minimal modifications to a standard large language model (LLM). 
-            By incorporating a Diffusion Loss and adopting a frame-level autoregressive strategy, 
-            the proposed method features low latency, high efficiency, and fine-grained multimodal controllability.
+            Recently, interactive digital human video generation has attracted widespread attention and achieved remarkable progress. 
+            However, building such a practical system that can interact with diverse input signals in real time remains challenging to existing methods, which often struggle with high latency, heavy computational cost, and limited controllability. 
+            In this work, we introduce an autoregressive video generation framework that enables interactive multimodal control and low-latency extrapolation in a streaming manner. 
+            With minimal modifications to a standard large language model (LLM), our framework accepts multimodal condition encodings including audio, pose, and text, and outputs spatially and semantically coherent representations to guide the denoising process of a diffusion head. 
+            To support this, we construct a large-scale dialogue dataset of approximately 20,000 hours from multiple sources, providing rich conversational scenarios for training. 
+            We further introduce a deep compression autoencoder with up to 64× reduction ratio, which effectively alleviates the long-horizon inference burden of the autoregressive model.
+            Extensive experiments on duplex conversation, multilingual human synthesis, and interactive world model highlight the advantages of our approach in low latency, high efficiency, and fine-grained multimodal controllability.  
           </p>
         </div>
       </div>
@@ -165,7 +189,7 @@
   <div class="container is-max-desktop">
     <h2 class="title is-4">Autoregressive Generation Model</h2>
     <div class="columns is-centered has-text-centered">
-      <img src="./static/images/inference.png"
+      <img src="./static/images/inference-v2.jpg"
         class="interpolation-image"
         alt="Interpolate start reference image."/>
     </div>
@@ -175,7 +199,7 @@
     </h2>
     <p>
       To enable efficient streaming generation, we organize inputs and outputs into logical chunks, where
-      each chunk contains a concatenated sequence of audio tokens, pose tokens, and frame tokens.
+      each chunk contains a concatenated sequence of audio tokens, pose tokens, text tokens and frame tokens.
       This structured token organization facilitates both streaming control input and sequential output
       generation, allowing for real-time responsiveness while maintaining contextual coherence across chunks.
     </p>
@@ -187,13 +211,13 @@
       for high-quality visual outputs.
     </p>
     <p>
-      For efficient inference, we implement the diffusion head as an MLP and utilize flow matching to achieve high sampling efficiency. 
-      At inference time, the diffusion head completes the generation process within 5–10 sampling iterations, enabling real-time performance.
+      For efficient inference, we implement a lighweight diffusion head and utilize flow matching to achieve high sampling efficiency. 
+      At inference time, the diffusion head completes the generation process within 4 sampling iterations, enabling real-time performance.
     </p>
   </div>
 </section>
 
-<section>
+<section class="section">
   <div class="container is-max-desktop">
     <h2 class="title is-4">Highly Compressed Video Tokenizer</h2>
     <div class="columns is-centered has-text-centered">
@@ -242,11 +266,17 @@
     </p>
     <p>
       Data processing consists of three stages: preprocessing, annotation and synthetic data construction, and post-processing. 
-      Preprocessing: Temporal segmentation is performed using shot boundary detection and active speaker detection (ASD), followed by filtering of human subjects via face and body detection. 
+    </p>
+    <p>
+      <b>Preprocessing</b>: Temporal segmentation is performed using shot boundary detection and active speaker detection (ASD), followed by filtering of human subjects via face and body detection. 
       Each segmented clip then undergoes rigorous evaluation for visual quality, audio quality, and lip synchronization. 
-      Annotation and Data Construction: This stage includes quality assessment, caption, emotion label, and automatic speech recognition (ASR) transcription. 
+    </p>
+    <p>
+      <b>Annotation and Data Construction</b>: This stage includes quality assessment, caption, emotion label, and automatic speech recognition (ASR) transcription. 
       A part of single-person data is adapted into conversational formats using semantic analysis and text-to-speech (TTS) synthesis. 
-      Post-processing: Annotated data undergoes manual review combined with automatic sampling to ensure balanced, high-quality subsets. 
+    </p>
+    <p>
+      <b>Post-processing</b>: Annotated data undergoes manual review combined with automatic sampling to ensure balanced, high-quality subsets. 
     </p>
     <p>
       The final dataset contains approximately 20,000 hours of pre-training video data and over 400 hours of duplex fine-tuning (SFT) data.
